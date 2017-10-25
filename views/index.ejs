@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>cnode·Supported by Vue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="semantic.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="ui container">
+
+      <div class="ui secondary  menu">
+        <button @click="chooseTab"  class="ui button"  value="">首页</button>
+        <button @click="chooseTab" class="ui  button" value="ask">问答</button>
+        <button @click="chooseTab" class="ui  button" value="share">分享</button>
+        <button @click="chooseTab" class="ui  button" value="job">工作</button>
+        <button @click="chooseTab" class="ui button"  value="good">精华</button>
+        <select class="ui search dropdown" v-model="limit_topic">
+            <option v-for="item in [10,20,30]">{{ item }}</option>
+        </select>
+        <button class="ui button">{{ limit_topic }}</button>
+        <div class="right menu">
+          <div class="ui selection">
+
+          </div>
+          <div class="item">
+            <div class="ui icon input">
+              <input type="text" placeholder="Search...">
+              <i class="search link icon"></i>
+            </div>
+          </div>
+          <a class="ui item">登出 </a>
+        </div>
+      </div>
+
+
+      <div class="ui message inverted transition">
+        <i class="close icon"></i>
+        <div class="header">欢迎回来！</div><br>
+        <div class="content">
+          <p v-for="item in warning" > {{ item }}    <span class="ui green">[succeed]</span></p>
+        </div>
+
+      </div>
+
+
+
+      <div class="ui segments" v-for="data in siteList">
+        <div class="ui segment borderless">
+          <div class="ui red horizontal small label" v-if="data.top"> 置顶 </div>
+          <div class="ui yellow horizontal label" v-if="data.good"> 精华 </div>
+          <div class="ui green horizontal label" v-if="data.tab == 'share'"> 分享 </div>
+          <div class="ui grey horizontal label" v-if="data.tab == 'ask'"> 问答 </div>
+          <div class="ui black horizontal label" v-if="data.tab == 'job'"> 工作 </div>
+          <!-- <a v-bind:href="'localhost:3000/post/'+data.id">{{ data.title }}</a> -->
+          <a v-bind:href="'/post/?id='+data.id">{{ data.title }}</a>
+          <!-- 测试之后发现，href已经有了预设，就是localhost:3000,href中输入的string是在这之后的。 -->
+			<!-- 比如 href="/post"，转到的是localhost:3000/post 这个页面 -->
+        </div>
+      
+        
+      </div>
+
+
+      
+        <button class="ui button" @click="firstPage">第1页</button>
+        <div class="ui icon buttons">
+         <button class="ui button" @click="pageChange" v-for="item in page_list" v-html="item"></button>
+        </div>
+        <button class="ui button" @click="morePage">后五页</button>
+ 
+    </div>
+
+
+    <div class="ui center aligned basic segment">
+      <div class="ui horizontal divider">特别鸣谢</div>
+     
+      <div class="ui centered cards">
+        <div class="ui card">
+          <div class="ui image">
+            <img src="https://o4a7cbihz.qnssl.com/avatar/53cdccee-0cee-415f-817c-a31ed979107e">
+          </div>
+          <div class="content">
+            <a class="header">新生大学JavaScript入门课</a>
+            <div class="meta">
+                <p class="date">Create in Aug 2017</p>
+              <img class="ui avatar image" src="xgyang.jpg"><span>徐高阳</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+</div>
+</body>
+
+
+
+<script src="https://unpkg.com/vue"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/core.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+
+</html>

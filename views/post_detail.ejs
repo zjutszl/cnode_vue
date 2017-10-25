@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>cnode·Supported by Vue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="semantic.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+
+
+<body>
+
+
+  <div id="app">
+    <div class="ui container">
+      
+        <h2>{{ title }}</h2>
+
+        <div v-html="content" class="ui segments"></div>
+
+      </div>
+
+</div>
+</div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/core.js"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+  var postId = '<%= _id %>';
+  var app = new Vue({
+    el: "#app",
+    data: {
+      detailData : {
+        content:'zjutszl'
+      },
+      post_id:postId,
+      title:"",
+      content:""
+    },
+    methods:{
+      fetchData (){
+        axios.get('https://cnodejs.org/api/v1/topic/' + app.post_id)
+        .then(function(response) {
+          
+          if (response.data.success == true){
+            app.title = response.data.data.title;
+            app.content = response.data.data.content;
+          } else { alert("数据请求失败！")}
+          
+        })
+        .catch(function(err) {
+          alert(err);
+        })
+      }
+    }
+})
+
+app.fetchData();
+</script>
+<!-- <script type="text/javascript" src="app_detail.js"></script> -->
+
+</html>
+
