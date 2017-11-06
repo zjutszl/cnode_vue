@@ -4,6 +4,7 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.render('post_detail', {_id:req.query.id});
+    next();
 });
 
 

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "auto-start":"./node_modules/.bin/node-supervisor node ./bin/www"
+    "auto-start": "./node_modules/.bin/node-supervisor node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",

@@ -43,7 +43,7 @@
       },
       chooseTab (){
         sessionStorage.removeItem('page_number');
-        app.tab_string = event.target.value;
+        app.tab_string = event.target.id;
         app.page_number = 1;
         app.page_list = [1,2,3,4,5,6,7];
         app.fetchData();
@@ -119,4 +119,14 @@ window.addEventListener("load", function (event) {
   }
   app.fetchData();
 })
+
+
+$('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  })
+;
 

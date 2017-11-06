@@ -6,22 +6,23 @@
   <title>cnode·Supported by Vue</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="semantic.min.css" rel="stylesheet" type="text/css" />
+  <link href="icon.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
   <div id="app">
     <div class="ui container">
 
-      <div class="ui secondary  menu">
-        <button @click="chooseTab"  class="ui button"  value="">首页</button>
-        <button @click="chooseTab" class="ui  button" value="ask">问答</button>
-        <button @click="chooseTab" class="ui  button" value="share">分享</button>
-        <button @click="chooseTab" class="ui  button" value="job">工作</button>
-        <button @click="chooseTab" class="ui button"  value="good">精华</button>
-        <select class="ui search dropdown" v-model="limit_topic">
+      <div class="ui mini inverted menu">
+        <a  class="item" @click="chooseTab" id="">首页</a>
+        <a  class="item" @click="chooseTab" id="ask">问答</a>
+        <a  class="item" @click="chooseTab" id="share">分享</a>
+        <a  class="item" @click="chooseTab" id="job">招聘</a>
+        <a  class="item" @click="chooseTab" id="good">精华</a>
+        <!-- <select class="ui search dropdown" v-model="limit_topic">
             <option v-for="item in [10,20,30]">{{ item }}</option>
         </select>
-        <button class="ui button">{{ limit_topic }}</button>
+        <button class="ui button">{{ limit_topic }}</button> -->
         <div class="right menu">
           <div class="ui selection">
 
@@ -37,7 +38,7 @@
       </div>
 
 
-      <div class="ui message inverted transition">
+      <div class="ui message transition">
         <i class="close icon"></i>
         <div class="header">欢迎回来！</div><br>
         <div class="content">
@@ -66,11 +67,21 @@
 
 
       
-        <button class="ui button" @click="firstPage">第1页</button>
-        <div class="ui icon buttons">
-         <button class="ui button" @click="pageChange" v-for="item in page_list" v-html="item"></button>
+        <div class="ui pagination menu">
+        <a class="item" @click="firstPage">
+          1
+        </a>
+        <div class="disabled item">
+          ...
         </div>
-        <button class="ui button" @click="morePage">后五页</button>
+        <a class="item" @click="pageChange" v-for="item in page_list" v-html="item">
+        </a>
+        
+        <a class="item" @click="morePage">
+          后五页
+        </a>
+      </div>
+
  
     </div>
 

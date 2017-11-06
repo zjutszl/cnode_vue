@@ -2,21 +2,19 @@
 var app = new Vue({
     el: "#app",
     data: {
-      detailData : {
-        content:'zjutszl'
-      },
       post_id:postId,
       title:"",
-      content:""
+      content:"",
+      replies:[]
     },
     methods:{
       fetchData (){
         axios.get('https://cnodejs.org/api/v1/topic/' + app.post_id)
         .then(function(response) {
-          alert(JSON.stringify(response.data));
           if (response.data.success == true){
             app.title = response.data.data.title;
             app.content = response.data.data.content;
+            app.replies = response.data.data.replies;
           } else { alert("数据请求失败！")}
           
         })
@@ -27,4 +25,11 @@ var app = new Vue({
     }
 })
 
+function transform(ISO_time){
+  return moment(ISO_time).toNow();
+}
+
 app.fetchData();
+
+
+
