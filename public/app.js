@@ -4,7 +4,7 @@
       siteList: [],
       topics:"",
       warning:[],
-      limit_topic:10,
+      limit_topic:20,
       page_number:0,
       tab_string:"share",
       topics_visible: true,

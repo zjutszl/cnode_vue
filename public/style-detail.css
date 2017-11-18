@@ -1,0 +1,28 @@
+
+body {
+    font-size:medium;
+    font-family: Helvetica, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", STXihei, "华文细黑", Heiti, "黑体", sans-serif;
+}
+
+
+header {
+    font-size:2.5em;
+    font-weight: bold;
+    padding:50px 0 50px 300px;
+    margin:0 0 10px 0;
+
+    background-color: #80BD01;
+    color:#FFF;
+}
+
+#respondData img {
+    width:100%;
+}
+
+section#main {
+    margin:50px 0;
+}
+
+section#main h1 {
+    padding: 20px 0;
+}

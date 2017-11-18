@@ -7,22 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="semantic.min.css" rel="stylesheet" type="text/css" />
   <link href="icon.min.css" rel="stylesheet" type="text/css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/core.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
   <div id="app">
     <div class="ui container">
 
-      <div class="ui inverted menu">
-        <a  class="item" @click="chooseTab" id="">首页</a>
-        <a  class="item" @click="chooseTab" id="ask">问答</a>
-        <a  class="item" @click="chooseTab" id="share">分享</a>
-        <a  class="item" @click="chooseTab" id="job">招聘</a>
-        <a  class="item" @click="chooseTab" id="good">精华</a>
-        <!-- <select class="ui search dropdown" v-model="limit_topic">
-            <option v-for="item in [10,20,30]">{{ item }}</option>
-        </select>
-        <button class="ui button">{{ limit_topic }}</button> -->
+      <header class="ui fixed inverted menu">
+        <a class="item" @click="chooseTab" id="">首页</a>
+        <a class="item" @click="chooseTab" id="ask">问答</a>
+        <a class="item" @click="chooseTab" id="share">分享</a>
+        <a class="item" @click="chooseTab" id="job">招聘</a>
+        <a class="item" @click="chooseTab" id="good">精华</a>
+ 
         <div class="right menu">
           <div class="ui selection">
 
@@ -35,21 +37,24 @@
           </div>
           <a class="ui item">登出 </a>
         </div>
-      </div>
+      </header>
 
 
-      <div class="ui message transition">
+      <div class="ui message transition" id="message">
         <i class="close icon"></i>
-        <div class="header">欢迎回来！</div><br>
+        <div class="header">欢迎回来！</div>
+        <br>
         <div class="content">
-          <p v-for="item in warning" > {{ item }}    <span class="ui green">[succeed]</span></p>
+          <p v-for="item in warning"> {{ item }}
+            <span class="ui green">[succeed]</span>
+          </p>
         </div>
 
       </div>
 
 
 
-      <div class="ui segments" v-for="data in siteList">
+      <section class="ui segments" v-for="data in siteList">
         <div class="ui segment borderless">
           <div class="ui red horizontal small label" v-if="data.top"> 置顶 </div>
           <div class="ui yellow horizontal label" v-if="data.good"> 精华 </div>
@@ -59,15 +64,15 @@
           <!-- <a v-bind:href="'localhost:3000/post/'+data.id">{{ data.title }}</a> -->
           <a v-bind:href="'/post/?id='+data.id">{{ data.title }}</a>
           <!-- 测试之后发现，href已经有了预设，就是localhost:3000,href中输入的string是在这之后的。 -->
-			<!-- 比如 href="/post"，转到的是localhost:3000/post 这个页面 -->
+          <!-- 比如 href="/post"，转到的是localhost:3000/post 这个页面 -->
         </div>
-      
-        
-      </div>
 
 
-      
-        <div class="ui pagination menu">
+      </section>
+
+
+
+      <div class="ui pagination menu">
         <a class="item" @click="firstPage">
           1
         </a>
@@ -76,19 +81,19 @@
         </div>
         <a class="item" @click="pageChange" v-for="item in page_list" v-html="item">
         </a>
-        
+
         <a class="item" @click="morePage">
           后五页
         </a>
       </div>
 
- 
+
     </div>
 
 
-    <div class="ui center aligned basic segment">
+    <footer class="ui center aligned basic segment">
       <div class="ui horizontal divider">特别鸣谢</div>
-     
+
       <div class="ui centered cards">
         <div class="ui card">
           <div class="ui image">
@@ -97,23 +102,22 @@
           <div class="content">
             <a class="header">新生大学JavaScript入门课</a>
             <div class="meta">
-                <p class="date">Create in Aug 2017</p>
-              <img class="ui avatar image" src="xgyang.jpg"><span>徐高阳</span>
+              <p class="date">Create in Aug 2017</p>
+              <img class="ui avatar image" src="xgyang.jpg">
+              <span>徐高阳</span>
             </div>
           </div>
         </div>
       </div>
 
-  </div>
+    </footer>
 
-</div>
+  </div>
 </body>
 
 
 
-<script src="https://unpkg.com/vue"></script>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/core.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <script type="text/javascript" src="app.js"></script>
 
 </html>
