@@ -1,14 +1,21 @@
 # cnode_express
 
-## 路由：
+## 使用：
 
-**主页 | localhost:3000**
+```
+git clone https://github.com/zjutszl/cnode_express.git
 
-`app.js -> routes/index.js -> index.ejs`
+//进入项目目录
+cd cnode_express
 
-**文章详情 | localhost:3000/post/?id=123456123**
+//安装依赖
+npm install
 
-`app.js -> routes/post.js -> post_detail.ejs`
+//开启服务
+npm start
+```
+在浏览器输入 localhost:3000即可访问网页。
+
 
 ## 更新日志
 
