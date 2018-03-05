@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>iview example</title>
+  <link href="https://cdn.bootcss.com/semantic-ui/2.3.0/semantic.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+  <link href="https://cdn.bootcss.com/semantic-ui/2.3.0/components/segment.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/semantic-ui/2.3.0/components/card.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/semantic-ui/2.3.0/components/divider.css" rel="stylesheet">
+  <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+  <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <br>
+  <br>
+  <br>
+  <div id="app" class="ui container">
+    <c-menu></c-menu>
+    <!-- <div v-if="siteList" v-for="item in siteList"> -->
+    <c-segment :post="'okok'" :url="'doge'"></c-segment>
+    <!-- </div> -->
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1 class="ui header">原则：建立自己的原则清单
+      <div class="sub header">我不希望你们盲目地遵循这些原则。相反，我希望你们质疑我的每一句话，从我的这些原则中精挑细选，以便找出适合你的组合 ———— Ray Dalio</div>
+    </h1>
+
+
+    <!-- <i-table stripe border :columns="index" :data="content">
+    </i-table> -->
+
+    <br>
+    <footer>
+      <h3>开发者日志</h3>
+      初步设想是提供两个页面：1.原则列表 2.原则评分系统——类似连续答题的样式，一题一题来，X掉时显示提示框[用ivew的rank来做]
+    </footer>
+    <thanks></thanks>
+  </div>
+
+  
+
+
+  <script>
+    var bus = new Vue()
+    
+    
+
+    Vue.component('c-segment', {
+      props: {
+        post: {
+          type: String,
+          required: true
+        },
+        url: {
+          type: String,
+          required: true
+        }
+      },
+      data() {
+        return {
+          title: this.post,
+          url: this.url
+        }
+      }
+      ,
+      template: `
+        <div class="ui segment">
+          <a :href="'https://www.baidu.com'">{{ title }}</a>
+        </div>
+      `
+    })
+
+    Vue.component('c-menu', {
+      template:
+        `<div>
+        <Menu mode="horizontal" :theme="theme1" active-name="1" @on-select='app.fetchData'>
+            <MenuItem name="">
+                <Icon type="ios-paper"></Icon>
+                首页  
+            </MenuItem>
+            <MenuItem name="good">
+                <Icon type="settings"></Icon>
+                精华
+            </MenuItem>
+            <MenuItem name="ask">
+                <Icon type="ios-people"></Icon>
+                问答
+            </MenuItem>
+            <MenuItem name="share">
+                <Icon type="settings"></Icon>
+                分享
+            </MenuItem>
+            <MenuItem name="job">
+                <Icon type="settings"></Icon>
+                招聘
+            </MenuItem>
+        </Menu>
+        <br>
+        
+    </div>
+    `,
+      data() {
+        return {
+          theme1: 'light'
+        }
+      },
+      methods: {
+        change(tag) {
+          app.fetchData(tag);
+        }
+        // fetchData(tab, page_number = 0, limit_topic = 20) {
+        //   axios.get('https://cnodejs.org/api/v1/topics', {
+        //     params: {
+        //       tab: tab,
+        //       page: page_number,
+        //       limit: limit_topic
+        //     }
+        //   })
+        //     .then(function (response) {
+        //       if (response.success = 'true') {
+        //         // if (app.warning.indexOf("fetchData") === -1) {
+        //         //   app.warning.push("fetchData");
+
+        //         // }
+        //         alert("success!" + "you're at " + tab + " page")
+        //       } else { return; }
+
+        //       bus.$emit('dataGet',response.data.data)
+        //       // this.siteList = response.data.data; //response.data.data才能获得response中的data数组
+        //     })
+        // }
+      }
+    }
+    )
+
+
+    new Vue({
+      el: '#app',
+      data: {
+        siteList: []
+      },
+      methods: {
+        fetchData(tab, page_number = 0, limit_topic = 20) {
+          axios.get('https://cnodejs.org/api/v1/topics', {
+            params: {
+              tab: tab,
+              page: page_number,
+              limit: limit_topic
+            }
+          })
+            .then(function (response) {
+              if (response.success = 'true') {
+                // if (app.warning.indexOf("fetchData") === -1) {
+                //   app.warning.push("fetchData");
+
+                // }
+                alert("success!" + "you're at " + tab + " page")
+              } else { return; }
+
+              // bus.$emit('dataGet',response.data.data)
+              this.siteList = response.data.data; //response.data.data才能获得response中的data数组
+            })
+        }
+      },
+      created() {
+        bus.$on('dataGet', function (data) {
+          this.siteList = data;
+        })
+      }
+    })
+  </script>
+</body>
+
+</html>
