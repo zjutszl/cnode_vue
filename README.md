@@ -1,4 +1,4 @@
-# my-project
+# Cnode_Vue SPA
 
 > A Vue.js project
 
