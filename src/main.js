@@ -6,7 +6,10 @@ import App from './App'
 import router from './router'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+import BootstrapVue from 'bootstrap-vue'
 
+
+Vue.use(BootstrapVue);
 Vue.use(VueRouter)
 Vue.use(iView)
 

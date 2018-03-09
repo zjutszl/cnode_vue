@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="ui container">
     <Row>
-      <Col span="24">
+      <Col span="18">
         <Menu mode="horizontal" :theme="'light'" active-name="" @on-select='fetchData'>
             <MenuItem name="" >
                 <Icon type="ios-paper"></Icon>
@@ -24,6 +24,10 @@
                 招聘
             </MenuItem>
         </Menu>
+      </Col>
+      <Col span="6">
+        <Button @click="jumptoVue">toHelloVue</Button>
+        <Button @click="jumptoDetail">toHelloVue</Button>
       </Col>
       <!-- <Col span="8">
         <Menu mode="horizontal" :theme="'light'" active-name="" @on-select='fetchData'>
@@ -83,8 +87,9 @@
 import router from "../router";
 import { Button, Table, Col, Row, Tag } from "iview";
 import axios from "axios";
-import cMenu from "./c-menu";
 const R = require("ramda");
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export default {
   name: "HelloWorld",
@@ -168,9 +173,15 @@ export default {
           this.siteList.pop();
         })
         .catch(err => console.log(err));
+    },
+    jumptoVue(){
+      router.push('/HelloVue');
+    },
+    jumptoDetail(){
+      router.push('/detail');
     }
   },
-  components: { Button, Table, Col, Row, Tag, cMenu },
+  components: { Button, Table, Col, Row, Tag },
   mounted() {
     this.fetchData();
   }
