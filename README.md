@@ -1,4 +1,4 @@
-# Cnode_Vue Single-Page-Application
+# Cnode_Vue SPA
 
 > A Vue.js project
 
