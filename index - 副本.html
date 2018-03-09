@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>@1</title>
+  <title>@2</title>
   <link href="https://cdn.bootcss.com/semantic-ui/2.3.0/semantic.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
   <link href="https://cdn.bootcss.com/semantic-ui/2.3.0/components/segment.min.css" rel="stylesheet">
@@ -19,24 +19,31 @@
   <br>
   <br>
   <div id="app" class="ui container">
-    <!-- 导航菜单 -->
-    <c-menu @hello="test"></c-menu>
+    <i-row>
+      <i-col span="16">
+        <c-menu @hello="test"></c-menu>
+      </i-col>
+      <i-col span="8">
+          <c-menu @hello="test"></c-menu>        
+      </i-col>
+    </i-row>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <!-- 列表 -->
-    <section class="ui segments" v-for="item in siteList">
-      
-      <!-- <c-segment :postId="item.id" :postTitle="item.title"></c-segment> -->
-
-      <div class="ui segment borderless">
-          <a :href="'https://cnodejs.org/api/v1/topic/'+item.id">{{item.title}}</a>
-        </div>
-      <!-- <p>
-        {{item.id }} + {{item.title}}
-      </p> -->
-
+    <section class="ui segments">
+      <div class="ui segment borderless" v-for="item in siteList">
+        <Tag color="#1c2438" v-if="item.top">置顶</Tag>
+        <Tag color="#495060" v-if="item.good">精华</Tag>
+        <Tag color="#80848f" v-if="item.tab == 'share'"> 分享 </Tag>
+        <Tag color="#80848f" v-if="item.tab == 'ask'"> 问答 </Tag>
+        <Tag color="#80848f" v-if="item.tab == 'job'"> 工作 </Tag>
+        <a :href="'https://cnodejs.org/api/v1/topic/'+item.id">{{item.title}}</a>
+      </div>
     </section>
 
-    <!-- 分割线 + 页面底部 -->
     <footer class="ui center aligned basic segment">
       <div class="ui horizontal divider">特别鸣谢</div>
 
@@ -89,9 +96,9 @@
         </Menu>
         <br>
       </div>`,
-      data(){
+      data() {
         return {
-          
+
         }
       },
       methods: {
@@ -119,13 +126,12 @@
           })
             .then(function (response) {
               if (response.success = 'true') {
-                // alert("success!" + "you're at " + tab + " page");
-                // alert(JSON.stringify(response.data.data));
                 return response.data;
+              } else {
+                throw new Error("fail to get Data from CNode");
               }
             }).then(function (response) {
               app.siteList = response.data;
-              // alert(JSON.stringify(app.siteList));//TODO:
             }).catch(
               (err) => console.log(err)
             )
