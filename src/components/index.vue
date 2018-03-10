@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="ui container">
-    <Row>
+  <div id="app" class="chinese-article container">
+    <!-- <Row>
       <Col span="18">
         <Menu mode="horizontal" :theme="'light'" active-name="" @on-select='fetchData'>
             <MenuItem name="" >
@@ -24,10 +24,8 @@
                 招聘
             </MenuItem>
         </Menu>
-      </Col>
-      <Col span="6">
-        <Button @click="jumptoDetail">toPost</Button>
-      </Col>
+      </Col> -->
+
       <!-- <Col span="8">
         <Menu mode="horizontal" :theme="'light'" active-name="" @on-select='fetchData'>
           <MenuItem name="" >
@@ -39,9 +37,16 @@
     <br>
   <!-- <Table size="small" stripe :columns="title" :data="siteList"></Table> -->
 
-  <div v-for="item in siteList">
+  <!-- <div v-for="item in siteList">
     <a :href="'/#/post/'+item.id">{{item.title}}</a>
-  </div>
+  </div> -->
+
+  <b-list-group>
+    <b-list-group-item v-for="item in siteList">
+      <a :href="'/#/post/'+item.id">{{item.title}}</a>
+    </b-list-group-item>
+  </b-list-group>
+  
 
     <!-- <section class="ui segments">
       <div class="ui segment borderless" v-for="item in siteList" :key="item.id">
@@ -92,61 +97,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export default {
-  name: "HelloWorld",
+  name: "index",
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
-      siteList: [],
-      title: [
-        {
-          title: "id",
-          key: "id"
-        },
-        // {
-        //   title: "author_id",
-        //   key: "author_id"
-        // },
-        // {
-        //   title: "tab",
-        //   key: "tab"
-        // },
-        // {
-        //   title: "content",
-        //   key: "content"
-        // },
-        {
-          title: "title",
-          key: "title"
-        },
-        {
-          title: "last_reply_at",
-          key: "last_reply_at"
-        },
-        // {
-        //   title: "good",
-        //   key: "good"
-        // },
-        // {
-        //   title: "top",
-        //   key: "top"
-        // },
-        {
-          title: "reply_count",
-          key: "reply_count"
-        },
-        {
-          title: "visit_count",
-          key: "visit_count"
-        },
-        {
-          title: "create_at",
-          key: "create_at"
-        },
-        {
-          title: "author",
-          key: "author"
-        }
-      ]
+      siteList: []
     };
   },
   methods: {
@@ -182,8 +137,11 @@ export default {
   mounted() {
     this.fetchData(this.$route.params.type);
   },
-  updated(){
-    this.fetchData(this.$route.params.type);    
+  watch: {
+  '$route' (to, from) {
+    this.fetchData(this.$route.params.type);
+  }
   }
 };
 </script>
+<style src="../assets/chinese-article.css"></style>

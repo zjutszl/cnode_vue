@@ -51,11 +51,11 @@
   word-break: break-word;
 }
 .chinese-article a {
-  color: #2ecc71;
+  color: #343A40;
   text-decoration: none;
 }
 .chinese-article a:hover {
-  color: #2ecc71;
+  color: #80BD01;
 }
 .chinese-article code {
   border: 1px solid #ddd;

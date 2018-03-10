@@ -2,14 +2,14 @@
   <div class="chinese-article container">
 
     <!-- 测试返回值专用 -->
-    <!-- <Button @click="fetchData()">back</Button> -->
+    <Button @click="goBack">back</Button>
     <!-- 
     {{$route.params.id}} -->
-    <!-- <p v-for="item in postkey" :key="item.id">
+    <p v-for="item in postkey" :key="item.id">
       {{ item }}:{{post[item]}}
-    </p> -->
+    </p>
     <!-- 测试返回值专用（结束） -->
-<Button @click="gotoTest">test model</Button>
+
 
     <span v-html="content"></span>
 
@@ -54,8 +54,8 @@ export default {
         })
         .catch(err => console.log(err));
     },
-    gotoTest(){
-      router.push('/post/'+this.tabType+'/test');
+    goBack(){
+      router.go(-1);
     }
   },
   mounted(){

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import post from '@/components/post'
 import index from '@/components/index'
+import postTest from '@/components/postTest'
 // import detail from '@/components/detail'
 
 Vue.use(Router)
@@ -13,6 +14,11 @@ export default new Router({
       path:'/post/:id',
       name:'post',
       component:post
+    },
+    {
+      path:'/post/:id/test',
+      name:'postTest',
+      component:postTest
     },
     {
       path:'/',
