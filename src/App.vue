@@ -61,6 +61,7 @@
 </template>
 
 <script>
+// import timeago from 'timeago.js';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {

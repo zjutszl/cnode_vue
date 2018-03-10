@@ -49,4 +49,8 @@ watch:{
 }
 ```
 
+#### 大坑。。。在<script>直接定义的变量或者函数，又或者是import的第三方库，如果没有放在export default的选项对象中，那么<html>上就访问不到。
+
+一定要把要用的放在export default上。
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
