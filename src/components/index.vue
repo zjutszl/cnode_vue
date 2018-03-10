@@ -26,8 +26,7 @@
         </Menu>
       </Col>
       <Col span="6">
-        <Button @click="jumptoVue">toHelloVue</Button>
-        <Button @click="jumptoDetail">toHelloVue</Button>
+        <Button @click="jumptoDetail">toPost</Button>
       </Col>
       <!-- <Col span="8">
         <Menu mode="horizontal" :theme="'light'" active-name="" @on-select='fetchData'>
@@ -174,11 +173,8 @@ export default {
         })
         .catch(err => console.log(err));
     },
-    jumptoVue(){
-      router.push('/HelloVue');
-    },
     jumptoDetail(){
-      router.push('/detail');
+      router.push('/post');
     }
   },
   components: { Button, Table, Col, Row, Tag },

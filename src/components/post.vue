@@ -1,5 +1,11 @@
 <template>
   <div class="hello">
+    
+    <!-- 导航栏 -->
+    
+   <!-- 导航栏结束 -->
+
+
     <br>
     <br>
     <br>
@@ -18,6 +24,8 @@
 import router from "../router";
 import { Button, Table, Col, Row, Tag } from "iview";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export default {
   name: "HelloVue",

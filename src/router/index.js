@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import HelloVue from '@/components/HelloVue'
+import post from '@/components/post'
 import index from '@/components/index'
 // import detail from '@/components/detail'
 
@@ -15,9 +15,9 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path:'/HelloVue',
-      name:'HelloVue',
-      component:HelloVue
+      path:'/post',
+      name:'post',
+      component:post
     },
     {
       path:'/',
