@@ -37,4 +37,16 @@ watch:{
 }
 ```
 
+#### 在post页面，想要同时fetchData和fetchAuthorData时，发现this.post.author.loginname无法传递到fetchAuthorData.
+
+用了很多console.log来测试，做了很多尝试，都没有解决问题。比如在mounted这里同时fetchData和fetchAuthorData,在fetchData中注入fetchAuthorData部分的代码，但都没有成功。
+测试发现this.authorName是能接到fetchData传来的值的，但是在函数定义时用this.authorName不能给到fetchAuthorData。
+后来想到可能是时间顺序出了问题。
+用watch侦测authorName的变化，一出现变化，就调用fetchAuthorData。这下搞定了！
+```javascript
+watch:{
+	authorData:'fetchAuthorData'  //简便写法，在authorData变化时调用字符串对应函数
+}
+```
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

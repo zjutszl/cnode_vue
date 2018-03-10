@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import post from '@/components/post'
 import index from '@/components/index'
 import postTest from '@/components/postTest'
