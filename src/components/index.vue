@@ -37,10 +37,11 @@
       </Col> -->
     </Row>
     <br>
- <!-- <div :key="task.id" v-for="item in siteList">
-    <a :href="'https://cnodejs.org/api/v1/topic/'+item.id">{{item.title}}</a>
-   </div>  -->
-  <Table size="small" stripe :columns="title" :data="siteList"></Table>
+  <!-- <Table size="small" stripe :columns="title" :data="siteList"></Table> -->
+
+  <div v-for="item in siteList">
+    <a :href="'/#/post/'+item.id">{{item.title}}</a>
+  </div>
 
     <!-- <section class="ui segments">
       <div class="ui segment borderless" v-for="item in siteList" :key="item.id">
@@ -179,7 +180,10 @@ export default {
   },
   components: { Button, Table, Col, Row, Tag },
   mounted() {
-    this.fetchData();
+    this.fetchData(this.$route.params.type);
+  },
+  updated(){
+    this.fetchData(this.$route.params.type);    
   }
 };
 </script>

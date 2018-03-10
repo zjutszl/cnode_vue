@@ -1,21 +1,18 @@
 <template>
-  <div class="hello">
-    
-    <!-- 导航栏 -->
-    
-   <!-- 导航栏结束 -->
+  <div>
 
-
-    <br>
-    <br>
-    <br>
-    <Button @click="fetchData('5433d5e4e737cbe96dcef312')">back</Button>
-    <p v-for="item in postkey">
+    <!-- 测试返回值专用 -->
+    <!-- <Button @click="fetchData()">back</Button> -->
+    <!-- 
+    {{$route.params.id}} -->
+    <!-- <p v-for="item in postkey">
       {{ item }}:{{post[item]}}
-    </p>
-  <span class="chinese-article">
+    </p> -->
+    <!-- 测试返回值专用（结束） -->
+
+  <div class="chinese-article">
     <p v-html="content"></p>
-  </span>
+  </div>
   
   </div>
 </template>
@@ -38,9 +35,9 @@ export default {
   },
   components: { Button, Table, Col, Row, Tag },
   methods: {
-    fetchData(id) {
+    fetchData() {
       axios
-        .get("https://cnodejs.org/api/v1/topic/" + id)
+        .get("https://cnodejs.org/api/v1/topic/" + this.$route.params.id)
         .then(response => {
           if ((response.success = "true")) {
             return response.data.data;
@@ -59,6 +56,9 @@ export default {
     back() {
       router.go(-1);
     }
+  },
+  mounted(){
+    this.fetchData();
   }
 };
 </script>

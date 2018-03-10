@@ -10,12 +10,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/HelloWorld',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path:'/post',
+      path:'/post/:id',
       name:'post',
       component:post
     },
@@ -23,11 +18,11 @@ export default new Router({
       path:'/',
       name:'index',
       component:index
-    // },
-    // {
-    //   path:'/detail',
-    //   name:'detail',
-    //   component:detail
+    },
+    {
+      path:'/:type',
+      name:'index',
+      component:index
     }
   ]
 })
