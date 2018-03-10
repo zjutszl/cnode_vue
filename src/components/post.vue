@@ -1,4 +1,6 @@
 <template>
+
+    
   <div class="chinese-article container">
 
     <!-- 测试返回值专用 -->
@@ -9,9 +11,15 @@
       {{ item }}:{{post[item]}}
     </p> -->
     <!-- 测试返回值专用（结束） -->
-<Button @click="gotoTest">test model</Button>
-
-    <span v-html="content"></span>
+  <div class="page-header">
+    <h1><Tag color="green" v-if="post.top">置顶</Tag>{{post.title}}</h1>
+  </div>
+  <p id="subhead">发布时间：{{post.create_at}} 
+    作者：{{post.author.loginname}} 
+    {{post.visit_count}}次浏览
+  </p>
+  <Button @click="gotoTest">test model</Button>
+  <span v-html="content"></span>
 
   
   </div>
@@ -65,4 +73,15 @@ export default {
 </script>
 
 <style src="../assets/chinese-article.css"></style>
+<style scoped>
+#subhead{
+  color:#80848f;
+  border-bottom: 1px solid #e5e5e5;
+  font-size:13px;
+}
+
+h2 {
+  /* margin: 1.2em 0; */
+}
+</style>
 

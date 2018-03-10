@@ -43,10 +43,18 @@
 
   <b-list-group>
     <b-list-group-item v-for="item in siteList">
-      <a :href="'/#/post/'+item.id">{{item.title}}</a>
+        <Tag color="green" v-if="item.top"> 置顶 </Tag>
+        <Tag v-else-if="item.good"> 精华 </Tag>
+        <Tag v-else-if="item.tab == 'share'"> 分享 </Tag>
+        <Tag v-else-if="item.tab == 'ask'"> 问答 </Tag>
+        <Tag v-else-if="item.tab == 'job'"> 工作 </Tag>
+        <Tag v-else color="red"> 被删除 </Tag>
+      <a :href="'/#/post/'+item.id">
+        {{item.title}}
+      </a>
+      <span style="float:right">（{{item.reply_count}}/{{item.visit_count}}）</span>
     </b-list-group-item>
   </b-list-group>
-  
 
     <!-- <section class="ui segments">
       <div class="ui segment borderless" v-for="item in siteList" :key="item.id">

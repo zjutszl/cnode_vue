@@ -9,16 +9,16 @@
   padding: 0;
 }
 .chinese-article h1 {
-  font-weight: 400;
-  font-size: 32px;
+  font-weight: 300;
+  font-size: 24px;
   margin: 1.2em 0;
 }
 .chinese-article h2 {
-  font-weight: 400;
-  font-size: 25px;
-  border-bottom: 1px solid #ccc;
-  padding: 10px 5px;
-  margin: 1.2em 0;
+  font-weight: 280;
+  font-size: 19px;
+  /* border-bottom: 1px solid #ccc; */
+  padding: 5px 0px;
+  margin: 0.4em 0;
 }
 .chinese-article h4,
 .chinese-article h5,
@@ -51,24 +51,38 @@
   word-break: break-word;
 }
 .chinese-article a {
-  color: #343A40;
+  color: #2b85e4;
   text-decoration: none;
 }
 .chinese-article a:hover {
-  color: #80BD01;
+  color: ##2d8cf0;
+  border-bottom: 2px solid #2d8cf0;
 }
 .chinese-article code {
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  font-family: Consolas, Monaco, "Andale Mono", monospace;
-  font-size: 14px;
-  background-color: #f1f1f1;
-  padding: 0.12em 0.2em;
+    /* color: #1c2438;
+    text-shadow: 0 1px rgba(0,0,0,0.2);
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none; */
+}
+img {
+  height: auto;
+  max-width: 100%;
   vertical-align: middle;
-  margin: 0 1px;
+  border: 0;
 }
 .chinese-article pre {
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 3px;
   background-color: #f1f1f1;
@@ -76,23 +90,19 @@
   width: 100%;
   padding: 1em;
   margin: 1em 0;
-  overflow: auto;
+  overflow: auto; */
 }
 .chinese-article pre code {
-  padding: 0;
+  /* padding: 0;
   margin: 0;
   border: 0;
-  line-height: 1.5;
-}
-.chinese-article img {
-  max-width: 100%;
-  height: auto;
+  line-height: 1.5; */
 }
 .chinese-article ol,
 .chinese-article ul {
   font-size: 15px;
   box-sizing: border-box;
-  padding: 10px 0 10px 20px;
+  padding: 3px 0 3px 20px;
   width: 100%;
 }
 .chinese-article ul li {
