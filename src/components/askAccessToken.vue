@@ -32,21 +32,32 @@ export default {
           });
         },
         onOk:() => {
-          // axios.post("https://cnodejs.org/api/v1/accesstoken", {
-          //   accesstoken: this.value
-          // }).then(response => {
-          //   console.log(JSON.stringify(response.data));
-          //   if (response.data.success == true){
-          //     console.log('######### 验证成功 #########');
-          //   } else {
-          //     console.log('######### 验证失败 #########');              
-          //   }
-          // })
-          this.$emit('getAcc', localStorage.getItem("AccessToken"));
-          // this.$emit('getAcc', );
+          axios.post("https://cnodejs.org/api/v1/accesstoken", {
+            accesstoken: this.value
+          }).then(response => {
+              console.log(JSON.stringify(response.data));
+              if (response.data.success == true){
+              this.$Message.success({
+                  render: h => {
+                    return h("span", [
+                      "登陆成功"
+                    ]);
+                  }
+                })
+              }          
+            }
+          ).catch(e => {
+              this.$Message.warning({
+              render: h => {
+                return h("span", [
+                  "AccessToken 验证未通过"
+                ]);
+              }
+              })
+            })
         }
-      });
-    }
+    })
   }
-};
+  }
+}
 </script>

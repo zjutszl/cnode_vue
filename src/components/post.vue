@@ -24,13 +24,12 @@
 
           <div v-html="content" id="article"></div>
 
-          <h1>评论区</h1>
+          <h1>评论区 <Icon type="chatboxes"></Icon></h1>
 
           <div v-if="post.replies.length !== 0">
-            <div v-for="item in post.replies">
+            <div v-for="item in post.replies" :key="item.id">
             
               <Avatar :src="item.author.avatar_url" />
-              <!-- {{ item.id }} -->
               {{ item.author.loginname }}
               <span style="font-size:0.6em;color:#80848f">{{ timeagoInstance(item.create_at) }}</span>
               <div id="comment">
@@ -46,11 +45,11 @@
         <Col span="5" offset="2">
            <Card bordered dishover id="author_card">
                 <span slot="title">作者信息</span>
-                <img class="img-rounded" :src="Author.avatar_url">
+                <img class="img-rounded" :src="Author.avatar_url" style="width:120px;height:120px">
                  <!-- <Avatar :src="Author.avatar_url" /> -->
                 <span>{{Author.loginname}}</span>
                 <p>作者的其他话题</p>
-                <div v-for="item in Author.recent_topics">
+                <div v-for="item in Author.recent_topics" :key="item.id">
                   · <a :href="'/#/post/'+item.id">{{ item.title}}</a>
                 </div>
             </Card>
@@ -74,7 +73,7 @@
 
     </Row>
 
-  
+  <!-- <bottomNav/> -->
 
   
   </div>
@@ -82,11 +81,12 @@
 
 <script>
 import router from "../router";
-import { Button, Table, Col, Row, Tag , Card , Avatar  } from "iview";
+import { Button,  Col, Row, Tag , Card , Avatar  } from "iview";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import timeago from 'timeago.js';
+// import bottomNav from './bottomNav'
 
 var timeagoInstance = new timeago();
 // console.log("##################################");
@@ -105,7 +105,7 @@ export default {
       authorName:""
     };
   },
-  components: { Button, Table, Col, Row, Tag , Card , Avatar  },
+  components: { Button,  Col, Row, Tag , Card , Avatar },
   methods: {
     fetchData() {
       axios
