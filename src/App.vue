@@ -36,21 +36,24 @@
         <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
       </b-nav-form> -->
 
-      <b-nav-item-dropdown text="Lang" right>
+      <!-- <b-nav-item-dropdown text="Lang" right>
         <b-dropdown-item href="#">EN</b-dropdown-item>
         <b-dropdown-item href="#">ES</b-dropdown-item>
         <b-dropdown-item href="#">RU</b-dropdown-item>
         <b-dropdown-item href="#">FA</b-dropdown-item>
-      </b-nav-item-dropdown>
+      </b-nav-item-dropdown> -->
 
-          <b-nav-item-dropdown right>
-            <!-- Using button-content slot -->
+          <b-nav-item>
+            <requireToken></requireToken>
+          </b-nav-item>
+          <!-- <b-nav-item-dropdown right>
             <template slot="button-content">
               <em>登录功能（C2）</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Signout</b-dropdown-item>
-          </b-nav-item-dropdown>
+          </b-nav-item-dropdown> -->
+
         </b-navbar-nav>
 
       </b-collapse>
@@ -64,22 +67,16 @@
 // import timeago from 'timeago.js';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import requireToken from './components/askAccessToken'
+
 export default {
   name: 'App',
   methods:{
     jumptoIndex(){
       router.push('/');
-    },
-  }
+    }
+  },
+  components:{ requireToken }
 }
 </script>
 
-<style>
-#app {
-  /* font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 0px; */
-}
-</style>
