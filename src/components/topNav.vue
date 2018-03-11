@@ -27,18 +27,43 @@
       <b-nav-item><router-link to="/job">招聘</router-link></b-nav-item>
     </b-navbar-nav>
 
-    <!-- Right aligned nav items -->
-    <b-navbar-nav class="ml-auto">
+        <b-navbar-nav class="ml-auto">
           <b-nav-item>
-            <requireToken></requireToken>
+            <profile v-if="isLogin" :data="authorData" @signatureChange="changeState"></profile>
+            <loginIn 
+            @signatureChange="changeState"
+            @giveAuthorData="giveDataToSon"
+            v-else
+            ></loginIn>
           </b-nav-item>
         </b-navbar-nav>
+
       </b-collapse>
     </b-navbar>
 </template>
 <script>
-import requireToken from "./askAccessToken";
+import loginIn from "./loginIn";
+import { DropdownMenu } from "iview";
+import profile from "./profile"
+
 export default {
-  components:{ requireToken }
+  data(){
+    return {
+      isLogin:false,
+      authorData:""
+    }
+  },
+  components:{ loginIn,profile },
+  methods:{
+    changeState (isLogin){
+      this.isLogin = isLogin;
+    },
+    giveDataToSon(data){
+      this.authorData = data;
+      // console.log(this.authorData);
+    }
+  }
+
+
 }
 </script>

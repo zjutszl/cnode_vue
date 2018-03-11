@@ -133,7 +133,7 @@ export default {
           .get("https://cnodejs.org/api/v1/user/"+ this.authorName)
           .then(response => {
             if (response.success = "true") {
-              // console.log(JSON.stringify(response.data));
+              console.log(JSON.stringify(response.data));
               return response.data.data;
               // console.log("congratulation!");
             } else {

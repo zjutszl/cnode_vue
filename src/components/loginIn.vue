@@ -10,7 +10,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      value: ""
+      value: "",
+      authorData:{}
     };
   },
   methods: {
@@ -36,6 +37,7 @@ export default {
             accesstoken: this.value
           }).then(response => {
               console.log(JSON.stringify(response.data));
+              this.authorData = JSON.stringify(response.data);
               if (response.data.success == true){
               this.$Message.success({
                   render: h => {
@@ -44,17 +46,21 @@ export default {
                     ]);
                   }
                 })
+
+              this.$emit('signatureChange',true);
+              this.$emit('giveAuthorData',this.authorData);
               }          
             }
           ).catch(e => {
-              this.$Message.warning({
+            this.$Message.warning({
               render: h => {
                 return h("span", [
                   "AccessToken 验证未通过"
                 ]);
               }
-              })
             })
+            this.$emit('signatureChange',false);
+          })
         }
     })
   }
