@@ -44,7 +44,7 @@
       </b-nav-item-dropdown> -->
 
           <b-nav-item>
-            <requireToken></requireToken>
+            <requireToken @getAcc="showIsOk"></requireToken>
           </b-nav-item>
           <!-- <b-nav-item-dropdown right>
             <template slot="button-content">
@@ -65,18 +65,67 @@
 
 <script>
 // import timeago from 'timeago.js';
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import requireToken from './components/askAccessToken'
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import requireToken from "./components/askAccessToken";
+import axios from "axios";
+
+
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// var bus = new Vue();
 
 export default {
-  name: 'App',
-  methods:{
-    jumptoIndex(){
-      router.push('/');
+  name: "App",
+  data(){
+    return {
+      author:{}
     }
   },
-  components:{ requireToken }
-}
+  methods: {
+    jumptoIndex() {
+      router.push("/");
+    },
+    checkAuthor(token){
+      // var pass = false;
+      
+      
+
+    },
+    showIsOk(token){
+      axios({
+        method:'POST',
+        url:'https://cnodejs.org/api/v1/accesstoken',
+        params:{
+          accesstoken: token
+        }
+      })
+      .then(response => {
+        console.log(JSON.stringify(response));
+        console.log(response.data.success);
+        this.author = response.data;
+        response.data.success
+        ?this.$Message.success({
+          render: h => {
+            return h("span", [
+              "登陆成功"
+            ]);
+          }
+        })
+        :false
+      })
+      .catch(e =>{
+        console.log("HTTP 401 验证未通过")
+        this.$Message.warning({
+        render: h => {
+          return h("span", [
+            "AccessToken验证未通过"
+          ]);
+        }
+      })
+      })
+  }
+  },
+  components: { requireToken }
+};
 </script>
 

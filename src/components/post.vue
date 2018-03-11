@@ -89,9 +89,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import timeago from 'timeago.js';
 
 var timeagoInstance = new timeago();
-console.log("##################################");
+// console.log("##################################");
 
-console.log(timeagoInstance.format('2016-06-12', 'zh_CN'));
+// console.log(timeagoInstance.format('2016-06-12', 'zh_CN'));
 
 export default {
   name: "HelloVue",
