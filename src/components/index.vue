@@ -5,7 +5,7 @@
   <b-list-group>
     <b-list-group-item v-for="item in siteList" :key="item.id">
         <Tag color="green" v-if="item.top"> 置顶 </Tag>
-        <Tag v-else-if="item.good"> 精华 </Tag>
+        <Tag color="green" v-else-if="item.good"> 精华 </Tag>
         <Tag v-else-if="item.tab == 'share'"> 分享 </Tag>
         <Tag v-else-if="item.tab == 'ask'"> 问答 </Tag>
         <Tag v-else-if="item.tab == 'job'"> 工作 </Tag>

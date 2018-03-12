@@ -68,6 +68,16 @@ this.value问题解决了，但是返回值呢？response.data.success是ture，
 结果，徐老师是对的。 我之前分析错误原因的时候以为是askAccessToken.vue文件内的作用域有问题（其实是没有写catch惹的祸），导致axios.post得不到正确的值。用原来的axios方法重写之后依然流畅运行。
 删除了父子组件信息传递的部分，代码轻了不少~
 
-奋斗了一路，终于搞定了
+奋斗了一路，终于搞定了。
+
+#### 写在axios.get获取不到指定数据（401）
+
+```
+axios.get('http://....',{
+	params:{ //这行不能少！！！
+		accesstoken: .......
+	}
+})
+```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

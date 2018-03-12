@@ -29,10 +29,12 @@
 
         <b-navbar-nav class="ml-auto">
           <b-nav-item>
-            <profile v-if="isLogin" :data="authorData" @signatureChange="changeState"></profile>
+            <nav-profile v-if="isLogin" :data="authorData" :msgNumber="msg"
+            @signatureChange="changeState"></nav-profile>
             <loginIn 
             @signatureChange="changeState"
             @giveAuthorData="giveDataToSon"
+            @giveAuthorMessage="giveMessageToSon"
             v-else
             ></loginIn>
           </b-nav-item>
@@ -44,16 +46,18 @@
 <script>
 import loginIn from "./loginIn";
 import { DropdownMenu } from "iview";
-import profile from "./profile"
+import navProfile from "./navProfile"
+// import axios from "axios"
 
 export default {
   data(){
     return {
       isLogin:false,
-      authorData:""
+      authorData:"",
+      msg:0
     }
   },
-  components:{ loginIn,profile },
+  components:{ loginIn,navProfile },
   methods:{
     changeState (isLogin){
       this.isLogin = isLogin;
@@ -61,9 +65,11 @@ export default {
     giveDataToSon(data){
       this.authorData = data;
       // console.log(this.authorData);
+    },
+    giveMessageToSon(data){
+      console.log('### From topNav');
+      this.msg = data;
     }
   }
-
-
 }
 </script>

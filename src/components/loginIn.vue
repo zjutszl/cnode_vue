@@ -10,7 +10,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      value: "",
+      value: localStorage.getItem('AccessToken') || "",
       authorData:{}
     };
   },
@@ -33,11 +33,14 @@ export default {
           });
         },
         onOk:() => {
+
           axios.post("https://cnodejs.org/api/v1/accesstoken", {
             accesstoken: this.value
           }).then(response => {
               console.log(JSON.stringify(response.data));
               this.authorData = JSON.stringify(response.data);
+              // foo.msg_number =12;
+              // this.authorData = JSON.stringify(foo);
               if (response.data.success == true){
               this.$Message.success({
                   render: h => {
@@ -60,6 +63,27 @@ export default {
               }
             })
             this.$emit('signatureChange',false);
+          })
+
+          console.log("i can get this value" + this.value);
+
+          // axios.post("https://cnodejs.org/api/v1/accesstoken", {
+          //   accesstoken: this.value
+          // })
+          
+          axios.get('https://cnodejs.org/api/v1/message/count',{
+            params:{
+              accesstoken: this.value
+            }
+          })
+          .then(res=>{
+            console.log(res.success);
+            console.log("### from loginIn");
+            // console.log(JSON.stringify(res));
+            this.$emit('giveAuthorMessage',res.data.data)
+          }).catch(e=>{
+            console.log(e);
+            console.log("### failed ### from loginIn");
           })
         }
     })

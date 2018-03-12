@@ -1,20 +1,20 @@
 <template>
 
 <div v-cloak>
-  <top-nav></top-nav>
+  <nav-top></nav-top>
   <router-view></router-view>
-  <bottom-nav></bottom-nav>
+  <nav-bottom></nav-bottom>
 </div>
 
 </template>
 
 <script>
-import bottomNav from "./components/bottomNav";
-import topNav from "./components/topNav";
+import navBottom from "./components/navBottom";
+import navTop from "./components/navTop";
 
 export default {
   name: "App",
-  components: { bottomNav, topNav }
+  components: { navBottom, navTop }
 };
 </script>
 

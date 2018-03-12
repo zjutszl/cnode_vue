@@ -39,7 +39,7 @@
           </div>
           <div v-else>
             <p>还没有人评论，来占个沙发吧~</p>
-          </div>
+        </div>
         </Col>
 
         <Col span="5" offset="2">
