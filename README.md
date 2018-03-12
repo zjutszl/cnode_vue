@@ -103,4 +103,8 @@ this.$route.params.xxx  写成了 this.$router.params.xxx
 大师兄在这方面比较有经验，请教了他，转身就甩给我一条链接。太牛了~32个赞。
 https://css-tricks.com/couple-takes-sticky-footer/
 
+这里我采用第四种方式：flex流式布局。
+
+
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

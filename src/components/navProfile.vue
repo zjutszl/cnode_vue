@@ -1,5 +1,5 @@
 <template>
-   <Dropdown trigger="click"  placement="bottom-end" @on-click="goToDetail">
+   <Dropdown trigger="hover"  placement="bottom-end" @on-click="goToDetail">
     <a href="javascript:void(0)">
         <Avatar shape="square" :src="avatar_url" />
     </a>
