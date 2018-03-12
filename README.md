@@ -80,4 +80,27 @@ axios.get('http://....',{
 })
 ```
 
+#### 为什么我地址栏变了，页面却没有刷新？
+
+在组件中watch,检测到地址栏的变化，就会调用相应的函数。（下面的代码是在vue-router官方教程上考下来的)
+
+```
+watch: {
+    $route(to, from) {
+      this.getStar();
+    }
+  }
+```
+
+
+####  单词写错了
+
+this.$route.params.xxx  写成了 this.$router.params.xxx
+这个坑也要注意，差一个'r'，很难找出来的。（注意看console）
+
+#### 怎么解决底部导航栏的置底问题？
+
+大师兄在这方面比较有经验，请教了他，转身就甩给我一条链接。太牛了~32个赞。
+https://css-tricks.com/couple-takes-sticky-footer/
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

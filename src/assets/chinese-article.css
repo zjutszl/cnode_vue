@@ -198,3 +198,8 @@ kbd kbd {
   -webkit-box-shadow: none;
           box-shadow: none;
 } */
+
+.list-group-item {
+  /* background-color: #E1E1E1 !important; */
+  border:1px solid #dddee1
+}

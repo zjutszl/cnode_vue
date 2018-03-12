@@ -1,4 +1,5 @@
 <template>
+
     <b-navbar v-once toggleable="md" type="dark" variant="dark" style="display:flex">
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
   <b-navbar-brand class="ml-auto" style="margin:auto" >
@@ -14,6 +15,7 @@
   </svg>
   </b-navbar-brand>
   </b-navbar>
+  
 </template>
 <script>
 export default {

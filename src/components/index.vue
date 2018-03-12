@@ -17,6 +17,8 @@
     </b-list-group-item>
   </b-list-group>
   <br>
+
+
  
 
     <!-- <div v-for="item in siteList" :key="item.id">
@@ -105,3 +107,12 @@ export default {
 };
 </script>
 <style src="../assets/chinese-article.css"></style>
+<style scoped>
+  b-list-group-item > Tag {
+     float:left
+  }
+  b-list-group-item > a {
+     float:left
+  }
+</style>
+

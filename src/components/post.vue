@@ -27,14 +27,15 @@
           <h1>评论区 <Icon type="chatboxes"></Icon></h1>
 
           <div v-if="post.replies.length !== 0">
-            <div v-for="item in post.replies" :key="item.id">
+            <div v-for="(item,index) in post.replies" :key="index">
             
-              <Avatar :src="item.author.avatar_url" />
+              <Avatar :src="item.author.avatar_url" shape="square" />
               {{ item.author.loginname }}
-              <span style="font-size:0.6em;color:#80848f">{{ timeagoInstance(item.create_at) }}</span>
-              <div id="comment">
-              <div v-html="item.content"></div>
+              <span style="font-size:0.7em;color:#80848f">{{ index }}楼·{{ timeagoInstance(item.create_at) }}</span>
+              <div id="comment" >
+                <div v-html="item.content"></div>
               </div>
+              
             </div>
           </div>
           <div v-else>
@@ -45,9 +46,11 @@
         <Col span="5" offset="2">
            <Card bordered dishover id="author_card">
                 <span slot="title">作者信息</span>
-                <img class="img-rounded" :src="Author.avatar_url" style="width:120px;height:120px">
+                <a :href="'/#/profile/'+Author.loginname+'/index'">
+                  <img class="img-rounded" :src="Author.avatar_url" style="width:120px;height:120px">
+                </a>
                  <!-- <Avatar :src="Author.avatar_url" /> -->
-                <span>{{Author.loginname}}</span>
+                <a :href="'/#/profile/'+Author.loginname+'/index'">{{Author.loginname}}</a>
                 <p>作者的其他话题</p>
                 <div v-for="item in Author.recent_topics" :key="item.id">
                   · <a :href="'/#/post/'+item.id">{{ item.title}}</a>
@@ -72,6 +75,7 @@
         </Col>
 
     </Row>
+   
 
   <!-- <bottomNav/> -->
 
@@ -86,7 +90,7 @@ import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import timeago from 'timeago.js';
-// import bottomNav from './bottomNav'
+
 
 var timeagoInstance = new timeago();
 // console.log("##################################");
@@ -158,7 +162,10 @@ export default {
     // this.fetchAuthorData();
   },
   watch:{
-    authorName: 'fetchAuthorData'
+    authorName: 'fetchAuthorData',
+    $route(to, from) {
+      this.fetchData();
+    }
   }
 };
 </script>

@@ -5,9 +5,9 @@
     </a>
     <DropdownMenu slot="list" >
         <DropdownItem >{{ loginname }}</DropdownItem>
-        <DropdownItem divided name="message"><Badge dot :count="msgNumber"><Icon type="ios-chatbubble-outline"></Icon> 消息</Badge></DropdownItem>
-        <DropdownItem name="theme"><Icon type="ios-paper-outline"></Icon> 我的主题</DropdownItem>
+        <DropdownItem name="index" divided><Icon type="ios-paper-outline"></Icon> 我的主页</DropdownItem>
         <DropdownItem name="star"><Icon type="star"></Icon> 我的收藏</DropdownItem>
+        <DropdownItem  name="message"><Badge dot :count="msgNumber"><Icon type="ios-chatbubble-outline"></Icon> 消息</Badge></DropdownItem>
 
         <DropdownItem divided @click.native="signOut">SignOut</DropdownItem>
     </DropdownMenu>

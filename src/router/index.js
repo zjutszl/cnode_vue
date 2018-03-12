@@ -4,7 +4,7 @@ import post from '@/components/post'
 import index from '@/components/index'
 import postTest from '@/components/postTest'
 import authormessage from '@/components/authormessage'
-import authorTheme from '@/components/authorTheme'
+import authorIndex from '@/components/authorIndex'
 import authorStar from '@/components/authorStar'
 
 // import detail from '@/components/detail'
@@ -39,9 +39,9 @@ export default new Router({
       component:authormessage
     },
     {
-      path:'/profile/:loginname/theme',
-      name:'authorTheme',
-      component:authorTheme
+      path:'/profile/:loginname/index',
+      name:'authorIndex',
+      component:authorIndex
     },
     {
       path:'/profile/:loginname/star',

@@ -3,18 +3,43 @@
  <div class="container chinese-article">
    <br>
 <h1>你的消息</h1>
-<h2>未读消息</h2>
-    <Card :bordered="false" style="width:500px" v-for="item in unRead" :key="item.id">
-      <p slot="title"></p>
-      <p></p>
-      <button @click.native="item.has_read=true"></button>
-    </Card>
-<h2>未读消息</h2>
-    <Card :bordered="false" style="width:500px" v-for="item in hasRead" :key="item.id">
-      <p slot="title"></p>
-      <p></p>
-      <button @click.native="item.has_read=true"></button>
-    </Card>
+<h2><Icon type="chatbubble-working" color="#2b85e4"></Icon> 未读消息</h2>
+<b-list-group>
+  <div v-if="unRead.length !== 0">
+    <b-list-group-item v-for="(item, index) in unRead" :key="index">
+
+      <!-- <span style="float:right">{{ item.reply.create_at }}</span> -->
+      <Avatar :src="item.author.avatar_url" shape="square"/>
+      <a :href="'#'">{{ item.author.loginname}}</a> 在
+      <a :href="'/#/post/'+item.topic.id">
+        {{item.topic.title}}
+      </a>
+      中@了你
+      <span style="font-size:0.6em;color:#80848f">{{ timeagoInstance(item.reply.create_at) }}</span>
+    </b-list-group-item>
+  </div>
+  <b-list-group-item v-else>
+    暂无消息
+  </b-list-group-item>
+</b-list-group>
+
+
+
+<h2><Icon type="checkmark-circled" color="#19be6b"></Icon> 已读消息</h2>
+<b-list-group>
+  <b-list-group-item v-for="(item, index) in hasRead" :key="index">
+
+    <!-- <span style="float:right">{{ item.reply.create_at }}</span> -->
+    <Avatar :src="item.author.avatar_url" shape="square"/>
+    <a :href="'#'">{{ item.author.loginname}}</a> 在
+    <a :href="'/#/post/'+item.topic.id">
+      {{item.topic.title}}
+    </a>
+    中@了你
+    <span style="font-size:0.6em;color:#80848f">{{ timeagoInstance(item.reply.create_at) }}</span>
+  </b-list-group-item>
+</b-list-group>
+
 <br>
 </div>
 </div>
@@ -23,10 +48,14 @@
 
 <script>
 import router from "../router";
-import { Button, Col, Row, Tag } from "iview";
+import { Button, Col, Row, Tag , Avatar} from "iview";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import timeago from 'timeago.js';
+
+
+var timeagoInstance = new timeago();
 
 export default {
   name: "authorMessage",
@@ -34,30 +63,7 @@ export default {
   data() {
     return {
       hasRead: [],
-      unRead:[
-
-        {
-        id: "543fb7abae523bbc80412b26",
-        type: "at",
-        has_read: false,
-        author: {
-          loginname: "alsotang",
-          avatar_url: "https://avatars.githubusercontent.com/u/1147375?v=2"
-        },
-        topic: {
-          id: "542d6ecb9ecb3db94b2b3d0f",
-          title: "adfadfadfasdf",
-          last_reply_at: "2014-10-18T07:47:22.563Z"
-        },
-        reply: {
-          id: "543fb7abae523bbc80412b24",
-          content: "[@alsotang](/user/alsotang) 哈哈",
-          ups: [ ],
-          create_at: "2014-10-16T12:18:51.566Z"
-          }
-        }
-
-      ]
+      unRead:[]
     };
   },
   methods: {
@@ -71,7 +77,7 @@ export default {
         })
         .then(response => {
           if ((response.success = "true")) {
-            console.log("#### authorMessage.vue : you get my message!");
+            // console.log("#### authorMessage.vue : you get my message!");
             this.hasRead = response.data.data.has_read_messages;
             this.unRead = response.data.data.hasnot_read_messages;
           } else {
@@ -80,61 +86,21 @@ export default {
         })
         .then(response => {
           console.log("congratulation!");
-          // this.siteList = response.data;
-          // this.siteList.push("xiaoming");
-          // this.siteList.pop();
         })
         .catch(err => console.log(err));
     },
-
-    getStar() {
-      axios
-        .get(" https://cnodejs.org/api/v1/topic_collect" + this.$router.params.loginname)
-        .then(response => {
-          if ((response.success = "true")) {
-            console.log("############# No.9 ####################");
-            console.log(response.data.data);
-          } else {
-            throw new Error("fail to get Data from CNode");
-          }
-        })
-        .then(response => {
-          console.log("congratulation!");
-
-        })
-        .catch(err => console.log(err));
-    },
-
-    getTheme(){
-      // axios
-      //   .get(" https://cnodejs.org/api/v1/topic_collect" + this.$router.params.loginname)
-      //   .then(response => {
-      //     if ((response.success = "true")) {
-      //       console.log("############# No.9 ####################");
-      //       console.log(response.data.data);
-      //     } else {
-      //       throw new Error("fail to get Data from CNode");
-      //     }
-      //   })
-      //   .then(response => {
-      //     console.log("congratulation!");
-
-      //   })
-      //   .catch(err => console.log(err));
+    timeagoInstance(time){
+      var timeago_instance = new timeago();
+      return(timeago_instance.format(time, 'zh_CN'));
     }
   },
   mounted() {
-    // this.fetchData(this.$route.params.type);
-    switch (this.$route.params.type){
-      case 'message':
-        this.getMessage();
-        break;
+    this.getMessage();
+  },
+  watch: {
+    $route(to, from) {
+      this.getMessage();
     }
-  // },
-  // watch: {
-  //   $route(to, from) {
-  //     this.fetchData(this.$route.params.type);
-  //   }
   }
 };
 </script>
@@ -146,6 +112,11 @@ export default {
 
 h1 {
   margin: 10px 0px;
+}
+
+.list-group-item {
+  /* background-color: #E1E1E1 !important; */
+  border:1px solid #dddee1
 }
 </style>
 
