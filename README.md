@@ -103,8 +103,39 @@ this.$route.params.xxx  写成了 this.$router.params.xxx
 大师兄在这方面比较有经验，请教了他，转身就甩给我一条链接。太牛了~32个赞。
 https://css-tricks.com/couple-takes-sticky-footer/
 
-这里我采用第四种方式：flex流式布局。
+英文版看起来有点困难，找了篇中文版的~
+https://www.cnblogs.com/shicongbuct/p/6487122.html
 
+这里我采用了flex流式布局。
+
+```css
+body { 
+    display: flex; 
+    flex-flow: column; 
+    min-height: 100vh;
+ }
+ .content {
+    flex: 1;
+}
+.footer{
+    flex: 0;
+}
+```
+
+
+学了不够？再来一套阮一峰flex布局教程
+[语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+[实例篇](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html)
+
+#### 评论区气泡制作
+
+参考了这篇文章http://www.jb51.net/css/150389.html
+
+根据这个改出来的聊天气泡。
+
+#### 有组织的写CSS
+
+将容器，标题，内容分别用不同的id来锚定，这样写margin,padding这些间距更好写。
 
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
