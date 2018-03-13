@@ -26,7 +26,7 @@
               </a>
               
               <span style="float:right"><Avatar :src="item.author.avatar_url" shape="square" /> {{item.author.loginname}} 
-                <span style="color:#80848f">{{ timeagoInstance(item.last_reply_at) }}回复</span>
+                <span style="color:#80848f">{{ timeagoInstance(item.last_reply_at) }}创建</span>
               </span>
             </b-list-group-item>
           </b-list-group>

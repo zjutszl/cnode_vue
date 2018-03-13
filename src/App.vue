@@ -1,13 +1,14 @@
 <template>
 
-<div id="app">
-  <div class="content">
+
+  <div id="body">
+  <div id="content">
     <nav-top></nav-top>
     <router-view></router-view>
   </div>
-  <nav-bottom class="footer"></nav-bottom>
+  <nav-bottom id="footer"></nav-bottom>
    <BackTop></BackTop>
-</div>
+  </div>
 
 </template>
 
@@ -26,21 +27,23 @@ export default {
   display: none;
 }
 
-#app {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+
+
+#body {
+  display: flex; 
+  flex-flow: column; 
+  min-height: 100vh;
 }
 
-.content {
-  flex: 1 0 auto;
-  /* padding: 20px; */
+#content {
+  flex:1;
+  background-color: #e1e1e1;
 }
 
-.footer {
-  flex-shrink: 0;
-  /* padding: 20px; */
+#footer {
+  flex: 0;  
 }
+
 </style>
 
 

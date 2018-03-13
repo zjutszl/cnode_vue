@@ -1,7 +1,7 @@
 <template>
   <div class="chinese-article container">
 
-  <br>
+
   <b-list-group>
     <b-list-group-item v-for="item in siteList" :key="item.id">
         <Tag color="green" v-if="item.top"> 置顶 </Tag>
@@ -16,7 +16,6 @@
       <span style="float:right">（{{item.reply_count}}/{{item.visit_count}}）</span>
     </b-list-group-item>
   </b-list-group>
-  <br>
 
 
  
@@ -113,6 +112,13 @@ export default {
   }
   b-list-group-item > a {
      float:left
+  }
+
+  .container {
+    padding-right: 3vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 18vh;
   }
 </style>
 
