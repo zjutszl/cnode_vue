@@ -137,5 +137,18 @@ body {
 
 将容器，标题，内容分别用不同的id来锚定，这样写margin,padding这些间距更好写。
 
+#### 一个.vue组件内部状态都是共享的，要做到每个状态分离，还是要再造个子组件，再去调用它
+
+点赞、回复图标想要做到移到评论那一块就显示“点赞”、“回复”的图标，使用@mouseover,@mouseout可以侦听到鼠标划入划出。但后来状态判断上没有理清楚，移到一个评论上，所有的点赞回复图标都显示了。。
+后来想到用子组件来做状态的分离。 过程略去不说。
+
+#### 用flex流式布局来解决评论区的“点赞”“回复”图标
+
+```css
+#comment {
+	display:flex;
+	justify-content:space-between;
+}
+```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

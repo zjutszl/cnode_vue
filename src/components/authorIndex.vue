@@ -11,7 +11,7 @@
                 {{item.title}}
               </a>
               
-              <span style="float:right"><Avatar :src="item.author.avatar_url" shape="square" /> {{item.author.loginname}} 
+              <span class="times"><Avatar :src="item.author.avatar_url" shape="square" /> {{item.author.loginname}} 
                 <span style="color:#80848f">{{ timeagoInstance(item.last_reply_at) }}创建</span>
               </span>
             </b-list-group-item>
@@ -25,7 +25,7 @@
                 {{item.title}}
               </a>
               
-              <span style="float:right"><Avatar :src="item.author.avatar_url" shape="square" /> {{item.author.loginname}} 
+              <span class="times"><Avatar :src="item.author.avatar_url" shape="square" /> {{item.author.loginname}} 
                 <span style="color:#80848f">{{ timeagoInstance(item.last_reply_at) }}创建</span>
               </span>
             </b-list-group-item>
@@ -168,6 +168,15 @@ h1 {
 
 #downList {
   margin-bottom: 20px
+}
+
+.b-list-group{
+  display: flex;
+  align-items: center
+}
+
+.times {
+  float: right;
 }
 
 

@@ -3,7 +3,9 @@
 
   <div id="body">
   <div id="content">
-    <nav-top></nav-top>
+    <Affix :offset-top="0">
+      <nav-top></nav-top>
+    </Affix>
     <router-view></router-view>
   </div>
   <nav-bottom id="footer"></nav-bottom>
@@ -15,10 +17,11 @@
 <script>
 import navBottom from "./components/navBottom";
 import navTop from "./components/navTop";
+import { Affix } from 'iview'
 
 export default {
   name: "App",
-  components: { navBottom, navTop }
+  components: { navBottom, navTop , Affix }
 };
 </script>
 

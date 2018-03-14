@@ -25,12 +25,12 @@ export default new Router({
     },
     {
       path:'/',
-      name:'index',
+      name:'index1',
       component:index
     },
     {
       path:'/:type',
-      name:'index',
+      name:'index2',
       component:index
     },
     {

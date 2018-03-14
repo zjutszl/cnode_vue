@@ -3,7 +3,7 @@
 
 
   <b-list-group>
-    <b-list-group-item v-for="item in siteList" :key="item.id">
+    <b-list-group-item v-for="(item,index) in siteList" :key="item.id" v-if="index < limited_topic">
         <Tag color="green" v-if="item.top"> 置顶 </Tag>
         <Tag color="green" v-else-if="item.good"> 精华 </Tag>
         <Tag v-else-if="item.tab == 'share'"> 分享 </Tag>
@@ -11,13 +11,22 @@
         <Tag v-else-if="item.tab == 'job'"> 工作 </Tag>
         <Tag v-else color="red"> 已删除 </Tag>
       <a :href="'/#/post/'+item.id">
-        {{item.title}}
+        {{item.title}}       
       </a>
-      <span style="float:right">（{{item.reply_count}}/{{item.visit_count}}）</span>
+      <span style="color:#80848f">（{{item.reply_count}}/{{item.visit_count}}）</span>
+      <span style="float:right">
+        <span><Avatar :src="item.author.avatar_url" shape="square" />
+          <span style="color:#80848f">&nbsp;{{timeagoInstance(item.last_reply_at)}}</span>
+        </span>
+ 
+      </span>
     </b-list-group-item>
+
   </b-list-group>
+<div id="More">
 
-
+  <Button @click="moreTopic" type="primary" >加载更多</Button>
+</div>
  
 
     <!-- <div v-for="item in siteList" :key="item.id">
@@ -55,28 +64,34 @@
 
 <script>
 import router from "../router";
-import { Button, Col, Row, Tag } from "iview";
+import { Button, Col, Row, Tag ,Page} from "iview";
 import axios from "axios";
 import * as R from "ramda"
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import timeago from 'timeago.js';
+
+
+var timeagoInstance = new timeago();
 
 export default {
   name: "index",
-  components: { Button, Col, Row, Tag},
+  components: { Button, Col, Row, Tag,Page},
   data() {
     return {
-      siteList: []
+      siteList: [],
+      limited_topic:20,
+      limit_topic:100
     };
   },
   methods: {
-    fetchData(tab = "", page_number = 0, limit_topic = 20) {
+    fetchData(tab = "") {
       axios
         .get("https://cnodejs.org/api/v1/topics", {
           params: {
             tab: tab,
-            page: page_number,
-            limit: limit_topic
+            page: 0,
+            limit: this.limit_topic
           }
         })
         .then(response => {
@@ -93,6 +108,17 @@ export default {
           this.siteList.pop();
         })
         .catch(err => console.log(err));
+    },
+    timeagoInstance(time){
+      var timeago_instance = new timeago();
+      return(timeago_instance.format(time, 'zh_CN'));
+    },
+    moreTopic(){
+      this.limited_topic += 20;
+      if(this.limited_topic >= this.limit_topic){
+        this.limit_topic += 100;
+        this.fetchData(this.$route.params.type);
+      }
     }
   },
   mounted() {
@@ -115,10 +141,17 @@ export default {
   }
 
   .container {
-    padding-right: 3vh;
+    padding-right: 1vh;
     margin-top: 2vh;
     margin-bottom: 2vh;
     margin-left: 18vh;
+  }
+
+  #More {
+    display: flex;
+    justify-content: center;
+    margin-top: 2vh;
+    margin-bottom:2vh;
   }
 </style>
 
