@@ -18,6 +18,8 @@
               <div v-html="content"></div>
             </article>
 
+            
+
         <!-- 评论区  -->
           <h1>评论区 <Icon type="chatboxes"></Icon></h1>
 
@@ -37,6 +39,10 @@
             <p>还没有人评论，来占个沙发吧~</p>
         </div>
         </Col>
+        <Spin fix v-if="spinShow">
+              <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
+              <div>Loading</div>
+        </Spin>
 
         <Col span="5" offset="2">
 
@@ -92,12 +98,14 @@ export default {
       Author:{},
       tabType:this.$route.params.id,
       authorName:"",
-      isShow:false
+      isShow:false,
+      spinShow:true
     };
   },
   components: { Button,  Col, Row, Tag , Card , Avatar ,Affix ,Comment },
   methods: {
     fetchData() {
+      this.spinShow=true;
       axios
         .get("https://cnodejs.org/api/v1/topic/" + this.$route.params.id)
         .then(response => {
@@ -115,6 +123,7 @@ export default {
           this.content = response.content;
           this.postkey = Object.keys(response);
           this.authorName = response.author.loginname;
+          this.spinShow = false;
           // console.log(this.authorName);          
         })
         .catch(err => console.log("err"));
@@ -254,5 +263,14 @@ article {
   padding-top:4px;
   border:0px;
 }
+
+ .demo-spin-icon-load{
+      animation: ani-demo-spin 1s linear infinite;
+  }
+  @keyframes ani-demo-spin {
+      from { transform: rotate(0deg);}
+      50%  { transform: rotate(180deg);}
+      to   { transform: rotate(360deg);}
+  }
 </style>
 

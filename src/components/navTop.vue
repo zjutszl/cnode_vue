@@ -1,5 +1,5 @@
 <template>
-<b-navbar toggleable="md" type="dark" variant="dark">
+<b-navbar toggleable="md" type="dark" variant="dark" id="nav">
   <!-- <b-navbar v-once toggleable="md" type="dark" variant="dark"> -->
 
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -19,12 +19,12 @@
 
     <b-collapse is-nav id="nav_collapse">
 
-    <b-navbar-nav>
-      <b-nav-item active><router-link to="/">主页</router-link></b-nav-item>
-      <b-nav-item><router-link to="/good">精华</router-link></b-nav-item>
-      <b-nav-item><router-link to="/ask">问答</router-link></b-nav-item>
-      <b-nav-item><router-link to="/share">分享</router-link></b-nav-item>
-      <b-nav-item><router-link to="/job">招聘</router-link></b-nav-item>
+    <b-navbar-nav class="tabs">
+      <b-nav-item active><router-link to="/" class="tab">主页</router-link></b-nav-item>
+      <b-nav-item><router-link to="/good" class="tab">精华</router-link></b-nav-item>
+      <b-nav-item><router-link to="/ask" class="tab">问答</router-link></b-nav-item>
+      <b-nav-item><router-link to="/share" class="tab">分享</router-link></b-nav-item>
+      <b-nav-item><router-link to="/job" class="tab">招聘</router-link></b-nav-item>
     </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
@@ -73,3 +73,30 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+#nav {
+  padding-left: 5vh;
+}
+
+.tabs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tab{
+  flex:0;
+  color:#F8F8F9;
+  font-size: 14px;
+}
+
+.tab:hover {
+  color:#80BD01;
+}
+
+/* .tab :hover{
+  color:#80BD01;
+} */
+</style>

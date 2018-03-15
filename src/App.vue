@@ -3,9 +3,9 @@
 
   <div id="body">
   <div id="content">
-    <Affix :offset-top="0">
-      <nav-top></nav-top>
-    </Affix>
+    <!-- <Affix :offset-top="0"> -->
+      <nav-top v-once></nav-top>
+    <!-- </Affix> -->
     <router-view></router-view>
   </div>
   <nav-bottom id="footer"></nav-bottom>

@@ -1,4 +1,4 @@
-# Cnode_Vue SPA
+# Cnode_Vue 单页面应用
 
 > A Vue.js project
 
@@ -18,13 +18,20 @@ npm run build
 npm run build --report
 ```
 
-回顾整个项目的开发过程。
+## 技术栈
+
+前端框架：Vue,Vue-Cli,Vue-router
+
+组件库：Bootstrap-Vue,iview
+
+第三方库：axios,timeago.js
+
+## 回顾整个项目的开发过程。
 
 #### 扒CNode的图标
 
 在CNode官网检查=>发现是SVG=>谷歌怎么扒SVG=>直接复制SVG代码块=>调整大小=>Done!
 
-#### 使用Vue-Cli,Vue-router,Bootstrap-Vue来构建应用
 
 #### Vue-router无法响应地址变化(不会随着地址栏的变化而更新页面)
 

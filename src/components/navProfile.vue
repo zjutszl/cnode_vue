@@ -9,7 +9,7 @@
         <DropdownItem name="star"><Icon type="star"></Icon> 我的收藏</DropdownItem>
         <DropdownItem  name="message"><Badge dot :count="msgNumber"><Icon type="ios-chatbubble-outline"></Icon> 消息</Badge></DropdownItem>
 
-        <DropdownItem divided @click.native="signOut">SignOut</DropdownItem>
+        <DropdownItem name="signout" divided @click.native="signOut">SignOut</DropdownItem>
     </DropdownMenu>
   </Dropdown>
 </template>
@@ -38,11 +38,12 @@ export default {
               }
             })
            this.$emit('signatureChange',false);
+           window.location.reload();
        },
        //点击菜单栏的选项，跳转到“消息”、“收藏”、“主题”三个页面
        goToDetail(type){
-        //    console.log('######## 这是profile上传出的数据 '+type);
-           router.push('/profile/'+ this.loginname +'/'+ type)
+        if(type != "signout")
+           router.push('/profile/'+ this.loginname +'/'+ type);
         // console.log('/profile/'+ this.loginname +'/'+ type);
        }
    }

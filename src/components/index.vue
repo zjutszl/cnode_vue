@@ -1,7 +1,5 @@
 <template>
   <div class="chinese-article container">
-
-
   <b-list-group>
     <b-list-group-item v-for="(item,index) in siteList" :key="item.id" v-if="index < limited_topic">
         <Tag color="green" v-if="item.top"> 置顶 </Tag>
@@ -16,49 +14,24 @@
       <span style="color:#80848f">（{{item.reply_count}}/{{item.visit_count}}）</span>
       <span style="float:right">
         <span><Avatar :src="item.author.avatar_url" shape="square" />
-          <span style="color:#80848f">&nbsp;{{timeagoInstance(item.last_reply_at)}}</span>
+          <span style="color:#80848f;font-size:12px">&nbsp;{{timeagoInstance(item.last_reply_at)}}</span>
         </span>
  
       </span>
     </b-list-group-item>
 
-  </b-list-group>
-<div id="More">
+      <Spin fix v-if="spinShow">
+        <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
+        <div>Loading</div>
+      </Spin>
 
-  <Button @click="moreTopic" type="primary" >加载更多</Button>
-</div>
- 
+    </b-list-group>
 
-    <!-- <div v-for="item in siteList" :key="item.id">
-      {{ item.id }} + {{ item.title }}
-    </div> -->
-
-    <!-- <footer class="ui center aligned basic segment">
-      <div class="ui horizontal divider">特别鸣谢</div>
-
-      <div class="ui centered cards">
-        <div class="ui card">
-          <div class="ui image">
-            <img src="./jsclass.jpg">
-          </div>
-          <div class="content">
-            <a class="header">新生大学JavaScript入门课</a>
-            <div class="meta">
-              <p class="date">Create in Aug 2017</p>
-              <img class="ui avatar image" src="xgyang.jpg">
-              <span>徐高阳</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </footer> -->
-
+    <div id="More">
+      <Button @click="moreTopic" id="Morebutton" long>加载更多</Button>
+    </div>
 
 </div>
-
-<!-- <bottomNav/> -->
-
 
 </template>
 
@@ -81,11 +54,14 @@ export default {
     return {
       siteList: [],
       limited_topic:20,
-      limit_topic:100
+      limit_topic:80,
+      spinShow:true
+      // loading:false
     };
   },
   methods: {
     fetchData(tab = "") {
+      this.spinShow=true;
       axios
         .get("https://cnodejs.org/api/v1/topics", {
           params: {
@@ -104,8 +80,9 @@ export default {
         .then(response => {
           console.log("congratulation!");
           this.siteList = response.data;
-          this.siteList.push("xiaoming");
-          this.siteList.pop();
+          // this.siteList.push("xiaoming");
+          // this.siteList.pop();
+          this.spinShow = false;
         })
         .catch(err => console.log(err));
     },
@@ -116,7 +93,7 @@ export default {
     moreTopic(){
       this.limited_topic += 20;
       if(this.limited_topic >= this.limit_topic){
-        this.limit_topic += 100;
+        this.limit_topic += 80;
         this.fetchData(this.$route.params.type);
       }
     }
@@ -133,12 +110,6 @@ export default {
 </script>
 <style src="../assets/chinese-article.css"></style>
 <style scoped>
-  b-list-group-item > Tag {
-     float:left
-  }
-  b-list-group-item > a {
-     float:left
-  }
 
   .container {
     padding-right: 1vh;
@@ -150,8 +121,18 @@ export default {
   #More {
     display: flex;
     justify-content: center;
-    margin-top: 2vh;
+    margin-top: 2px;
     margin-bottom:2vh;
   }
+
+  .demo-spin-icon-load{
+      animation: ani-demo-spin 1s linear infinite;
+  }
+  @keyframes ani-demo-spin {
+      from { transform: rotate(0deg);}
+      50%  { transform: rotate(180deg);}
+      to   { transform: rotate(360deg);}
+  }
+  
 </style>
 
