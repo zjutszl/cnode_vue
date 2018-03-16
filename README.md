@@ -56,9 +56,9 @@ watch:{
 }
 ```
 
-#### 大坑。。。在<script>直接定义的变量或者函数，又或者是import的第三方库，如果没有放在export default的选项对象中，那么<html>上就访问不到。
+#### 【大坑】在<script>直接定义的变量或者函数，又或者是import的第三方库，如果没有放在export default的选项对象中，那么<html>上就访问不到。
 
-一定要把要用的放在export default上。
+要调用的变量或者组件，一定要把要用的放在export default上。
 
 #### 一个困扰半天的大坑：promise.catch
 
@@ -68,12 +68,11 @@ this.value问题解决了，但是返回值呢？response.data.success是ture，
 用自己的accesstoken测试，通过。
 用错误的accesstoken测试，报401。
 
-问题还是在，分析代码发现，在promise.then里面接错误的请求是不行的（不像其他函数返回值，axios.post如果没有收到response，就会报错，而不是返回空数据），搜索了下catch的使用，加了上去。
-问题解决~
+问题还是在，分析代码发现，在promise.then里面接错误的请求是不可行的（不像其他函数返回值，axios.post如果没有收到response，就会报错，而不是返回空数据），应该用catch来接。
 
 7点的时候，徐老师发消息说：axios.post这样写没有问题。我想，这个通路已经打通了，改下试试就知道之前的写法对不对了。  
 结果，徐老师是对的。 我之前分析错误原因的时候以为是askAccessToken.vue文件内的作用域有问题（其实是没有写catch惹的祸），导致axios.post得不到正确的值。用原来的axios方法重写之后依然流畅运行。
-删除了父子组件信息传递的部分，代码轻了不少~
+删除了父子组件信息传递的部分，代码轻了不少~。
 
 奋斗了一路，终于搞定了。
 
@@ -84,6 +83,12 @@ axios.get('http://....',{
 	params:{ //这行不能少！！！
 		accesstoken: .......
 	}
+})
+
+//对比Post
+
+axios.post('http://....',{
+	accesstoken:......
 })
 ```
 
@@ -157,5 +162,12 @@ body {
 	justify-content:space-between;
 }
 ```
+
+#### 【加载更多】这个按钮
+
+通过Cnode的API获取主页topic时有可选参数：1.tab：主题 2.page：页数 3.limit：每页主题数。
+我尝试过像传统的1,2,3,4,5,6,7这样一页一页的选择。做出来之后发现：1.Bootstrap和iview两个组件库提供的翻页组件和这个主题不配 2.就论坛这个功能而言，翻页功能并不是那么特别重要，只要在用户想看更多的时候，让他看到更多就行了，未必要多少页多少页的。
+
+于是我就用了ivew里面的Button,添加了long属性（与容器宽度一致的大button），再调整下margin，保证按钮与上面topics，与下面底部导航栏之间有适当的空间。 Done!
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
