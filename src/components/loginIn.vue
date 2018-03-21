@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Button @click="handleRender">登录</Button>
+  <Button @click="Login">登录</Button>
 </div>
 </template>
 <script>
@@ -15,7 +15,7 @@ export default {
     };
   },
   methods: {
-    handleRender() {
+    Login() {
       this.$Modal.confirm({
         render: h => {
           return h("div", [

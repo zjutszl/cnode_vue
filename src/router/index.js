@@ -2,10 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import post from '@/components/post'
 import index from '@/components/index'
-import postTest from '@/components/postTest'
-import authormessage from '@/components/authormessage'
+import authorMessage from '@/components/authorMessage'
 import authorIndex from '@/components/authorIndex'
 import authorStar from '@/components/authorStar'
+import permissionDenyed from '@/components/permissionDenyed'
+
 
 // import detail from '@/components/detail'
 
@@ -19,11 +20,6 @@ export default new Router({
       component:post
     },
     {
-      path:'/post/:id/test',
-      name:'postTest',
-      component:postTest
-    },
-    {
       path:'/',
       name:'index1',
       component:index
@@ -35,8 +31,8 @@ export default new Router({
     },
     {
       path:'/profile/:loginname/message',
-      name:'authormessage',
-      component:authormessage
+      name:'authorMessage',
+      component:authorMessage
     },
     {
       path:'/profile/:loginname/index',
@@ -47,7 +43,11 @@ export default new Router({
       path:'/profile/:loginname/star',
       name:'authorStar',
       component: authorStar
+    // },
+    // {
+    //   path:'/404/denyed',
+    //   name:'denyed',
+    //   component:permissionDenyed
     }
-
   ]
 })

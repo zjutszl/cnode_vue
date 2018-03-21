@@ -27,8 +27,9 @@
 
     </b-list-group>
 
+    
     <div id="More">
-      <Button @click="moreTopic" id="Morebutton" long>加载更多</Button>
+      <Button @click="moreTopic" long>加载更多</Button>
     </div>
 
 </div>

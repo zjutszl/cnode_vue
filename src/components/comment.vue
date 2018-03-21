@@ -2,17 +2,13 @@
 
 <div id="contain">
   <div id="bubble"></div>
-  <!-- <div id="comment" @mousemove="Show" @mouseout="Hide"> -->
   <div id="comment">
   <div v-html="replycontent" class="comment-left"></div>
-    <!-- <Icon type="thumbsup" v-if="isShow" style="vertical-align: super;"></Icon> -->
     <div class="comment-right">
       <Icon type="thumbsup"  @click="up">{{ replyups.length }}</Icon>
       <Icon type="reply" ></Icon>
     </div>
-    <!-- <Icon type="reply" v-if="isShow" style="vertical-align: super;"></Icon> -->
   </div>
-       
 </div>
 
 </template>

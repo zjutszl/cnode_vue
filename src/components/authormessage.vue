@@ -1,12 +1,35 @@
 <template>
-<div class="page">
- <div class="container chinese-article">
-   <br>
-<h1>你的消息</h1>
-<h2><Icon type="chatbubble-working" color="#2b85e4"></Icon> 未读消息</h2>
-<b-list-group>
-  <div v-if="unRead.length !== 0">
-    <b-list-group-item v-for="(item, index) in unRead" :key="index">
+<div>
+
+<div class="page" v-if="isLogin">
+  <div class="container chinese-article">
+    <!-- <br> -->
+  <h1>你的消息</h1>
+  <h2><Icon type="chatbubble-working" color="#2b85e4"></Icon> 未读消息</h2>
+  <b-list-group>
+    <div v-if="unRead.length !== 0">
+      <b-list-group-item v-for="(item, index) in unRead" :key="index">
+
+        <!-- <span style="float:right">{{ item.reply.create_at }}</span> -->
+        <Avatar :src="item.author.avatar_url" shape="square"/>
+        <a :href="'#'">{{ item.author.loginname}}</a> 在
+        <a :href="'/#/post/'+item.topic.id">
+          {{item.topic.title}}
+        </a>
+        中@了你
+        <span style="font-size:0.6em;color:#80848f">{{ timeagoInstance(item.reply.create_at) }}</span>
+      </b-list-group-item>
+    </div>
+    <b-list-group-item v-else>
+      暂无消息
+    </b-list-group-item>
+  </b-list-group>
+
+
+
+  <h2><Icon type="checkmark-circled" color="#19be6b"></Icon> 已读消息</h2>
+  <b-list-group>
+    <b-list-group-item v-for="(item, index) in hasRead" :key="index">
 
       <!-- <span style="float:right">{{ item.reply.create_at }}</span> -->
       <Avatar :src="item.author.avatar_url" shape="square"/>
@@ -17,33 +40,15 @@
       中@了你
       <span style="font-size:0.6em;color:#80848f">{{ timeagoInstance(item.reply.create_at) }}</span>
     </b-list-group-item>
+  </b-list-group>
+
+  <!-- <br> -->
   </div>
-  <b-list-group-item v-else>
-    暂无消息
-  </b-list-group-item>
-</b-list-group>
-
-
-
-<h2><Icon type="checkmark-circled" color="#19be6b"></Icon> 已读消息</h2>
-<b-list-group>
-  <b-list-group-item v-for="(item, index) in hasRead" :key="index">
-
-    <!-- <span style="float:right">{{ item.reply.create_at }}</span> -->
-    <Avatar :src="item.author.avatar_url" shape="square"/>
-    <a :href="'#'">{{ item.author.loginname}}</a> 在
-    <a :href="'/#/post/'+item.topic.id">
-      {{item.topic.title}}
-    </a>
-    中@了你
-    <span style="font-size:0.6em;color:#80848f">{{ timeagoInstance(item.reply.create_at) }}</span>
-  </b-list-group-item>
-</b-list-group>
-
-<br>
 </div>
+
+<permission-denyed v-else/>
+
 </div>
- 
 </template>
 
 <script>
@@ -53,17 +58,18 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import timeago from 'timeago.js';
-
+import permissionDenyed from './permissionDenyed'
 
 var timeagoInstance = new timeago();
 
 export default {
   name: "authorMessage",
-  components: { Button, Col, Row, Tag },
+  components: { Button, Col, Row, Tag , permissionDenyed },
   data() {
     return {
       hasRead: [],
-      unRead:[]
+      unRead:[],
+      isLogin:false
     };
   },
   methods: {

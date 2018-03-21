@@ -29,25 +29,27 @@
 
         <b-navbar-nav class="ml-auto">
           <b-nav-item>
-            <nav-profile v-if="isLogin" :data="authorData" :msgNumber="msg"
-            @signatureChange="changeState"></nav-profile>
-            <loginIn 
+
+            <nav-profile v-if="isLogin"
+            @signatureChange="changeState"
+            :data="authorData" 
+            :msgNumber="msg"/>
+
+            <loginIn v-else
             @signatureChange="changeState"
             @giveAuthorData="giveDataToSon"
-            @giveAuthorMessage="giveMessageToSon"
-            v-else
-            ></loginIn>
+            @giveAuthorMessage="giveMessageToSon"/>
+
           </b-nav-item>
         </b-navbar-nav>
-
       </b-collapse>
     </b-navbar>
 </template>
+
 <script>
 import loginIn from "./loginIn";
 import { DropdownMenu } from "iview";
 import navProfile from "./navProfile"
-// import axios from "axios"
 
 export default {
   data(){
@@ -95,8 +97,4 @@ export default {
 .tab:hover {
   color:#80BD01;
 }
-
-/* .tab :hover{
-  color:#80BD01;
-} */
 </style>

@@ -1,79 +1,66 @@
 <template>
 
-  <div class="chinese-article">
-
-    <Row>
-        <Col span="13" offset="2" id="content">
-        
-        <!-- 正文 -->
-            <article>
-              <div class="page-header"  >
-                <h1><Tag color="green" v-if="post.top">置顶</Tag>{{post.title}}</h1>
-              </div>
-              <p id="subhead">发布时间：{{  timeagoInstance(post.create_at)}}&nbsp;
-                作者：{{post.author.loginname}}&nbsp;
-                {{post.visit_count}}次浏览
-              </p>
-              <Button @click="gotoTest">test model</Button>
-              <div v-html="content"></div>
-            </article>
-
-            
-
-        <!-- 评论区  -->
-          <h1>评论区 <Icon type="chatboxes"></Icon></h1>
-
-          <div v-if="post.replies.length !== 0">
-            <div v-for="(item,index) in post.replies" :key="index" id="comment-all" >
-              <div id="comment-users">
-                <Avatar :src="item.author.avatar_url" shape="square" />
-                &nbsp;{{ item.author.loginname }}
-                <span style="font-size:1.5vh;color:#80848f">&nbsp;{{ index+=1 }}楼·{{ timeagoInstance(item.create_at) }}</span>
-              </div>
-
-              <Comment :content="item.content" :ups="item.ups" :reply="item.id"></Comment>
-              
-            </div>
-          </div>
-          <div v-else>
-            <p>还没有人评论，来占个沙发吧~</p>
+<div class="chinese-article">
+  <Row>
+    <Col span="13" offset="2" id="content">
+      
+      <!-- 正文 -->
+      <article>
+        <div class="page-header"  >
+          <h1><Tag color="green" v-if="post.top">置顶</Tag>{{post.title}}</h1>
         </div>
-        </Col>
-        <Spin fix v-if="spinShow">
-              <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
-              <div>Loading</div>
-        </Spin>
+        <p id="subhead">发布时间：{{ timeagoInstance(post.create_at) }}&nbsp;作者：{{post.author.loginname}}&nbsp; {{post.visit_count}}次浏览 </p>
+        <div v-html="content"></div>
+      </article>
 
-        <Col span="5" offset="2">
-
-        <!-- <Affix :offset-top="0"> -->
           
-          <Card bordered dishover id="author_card">
-              <span slot="title">作者信息</span>
-              <a :href="'/#/profile/'+Author.loginname+'/index'">
-                <img class="img-rounded" :src="Author.avatar_url" style="width:10vh;height:10vh">
-              </a>
-                <!-- <Avatar :src="Author.avatar_url" /> -->
-              <a :href="'/#/profile/'+Author.loginname+'/index'">{{Author.loginname}}</a>
-              <p>作者的其他话题</p>
-              <div v-for="item in Author.recent_topics" :key="item.id">
-                · <a :href="'/#/post/'+item.id">{{ item.title }}</a>
-              </div>
-          </Card>
 
-        <!-- </Affix> -->
+      <!-- 评论区  -->
+        <h1>评论区 <Icon type="chatboxes"></Icon></h1>
 
-           
-            <br>
-        </Col>
+        <div v-if="post.replies.length !== 0">
+          <div v-for="(item,index) in post.replies" :key="index" id="comment-all" >
+            <div id="comment-users">
+              <Avatar :src="item.author.avatar_url" shape="square" />
+              &nbsp;{{ item.author.loginname }}
+              <span style="font-size:1.5vh;color:#80848f">&nbsp;{{ index+=1 }}楼·{{ timeagoInstance(item.create_at) }}</span>
+              &nbsp;
+              <Tag color="#80bd01" v-if="item.author.loginname == authorName">楼主</Tag>
+            </div>
 
-    </Row>
-   
+            <Comment :content="item.content" :ups="item.ups" :reply="item.id"></Comment>
+            
+          </div>
+        </div>
+        <div v-else>
+          <p>还没有人评论，来占个沙发吧~</p>
+        </div>
+      </Col>
 
-  <!-- <bottomNav/> -->
+      <!-- 加载动画 -->
+      <Spin fix v-if="spinShow">
+        <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
+        <div>Loading</div>
+      </Spin>
 
-  
-  </div>
+      <!-- 右栏：作者信息 -->
+      <Col span="5" offset="2">
+        <Card bordered dishover id="author_card">
+            <span slot="title">作者信息</span>
+            <a :href="'/#/profile/'+Author.loginname+'/index'">
+              <img class="img-rounded" :src="Author.avatar_url" style="width:10vh;height:10vh">
+            </a>
+              <!-- <Avatar :src="Author.avatar_url" /> -->
+            <a :href="'/#/profile/'+Author.loginname+'/index'">{{Author.loginname}}</a>
+            <p>作者的其他话题</p>
+            <div v-for="item in Author.recent_topics" :key="item.id">
+              · <a :href="'/#/post/'+item.id">{{ item.title }}</a>
+            </div>
+        </Card>
+      </Col>
+  </Row>    
+
+</div>
 </template>
 
 <script>
@@ -118,51 +105,34 @@ export default {
         })
         .then(response => {
           this.post = response;
-          // console.log(JSON.stringify(this.post));
-          // console.log(JSON.stringify(response));
           this.content = response.content;
           this.postkey = Object.keys(response);
           this.authorName = response.author.loginname;
           this.spinShow = false;
-          // console.log(this.authorName);          
         })
         .catch(err => console.log("err"));
     },
     fetchAuthorData(){
      axios
-          .get("https://cnodejs.org/api/v1/user/"+ this.authorName)
-          .then(response => {
-            if (response.success = "true") {
-              // console.log(JSON.stringify(response.data));
-              return response.data.data;
-              // console.log("congratulation!");
-            } else {
-              throw new Error("###fail to get Data from CNode###");
-            }
-          })
-          .then(response => {
-            this.Author = response;
-            // console.log(JSON.stringify(this.Author));
-          })
+      .get("https://cnodejs.org/api/v1/user/"+ this.authorName)
+      .then(response => {
+        if (response.success = "true") {
+          return response.data.data;
+        } else {
+          throw new Error("###fail to get Data from CNode###");
+        }
+      })
+      .then(response => {
+        this.Author = response;
+      })
     },
     timeagoInstance(time){
       var timeago_instance = new timeago();
       return(timeago_instance.format(time, 'zh_CN'));
-    },
-    gotoTest(){
-      router.push('/post/'+this.tabType+'/test');
-    // },
-    // show(index){
-    //   this.post.replies[index].isShow=true;
-    // },
-    // hide(index){
-    //   this.post.replies[index].isShow=false;
-    //   // this.isShow=false;
     }
   },
   mounted(){
     this.fetchData();
-    // this.fetchAuthorData();
   },
   watch:{
     authorName: 'fetchAuthorData',

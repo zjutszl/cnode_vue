@@ -3,12 +3,11 @@
 
   <div id="body">
   <div id="content">
-    <!-- <Affix :offset-top="0"> -->
-      <nav-top v-once></nav-top>
-    <!-- </Affix> -->
-    <router-view></router-view>
+    <nav-top v-once></nav-top>
+
+    <router-view ></router-view>
   </div>
-  <nav-bottom id="footer"></nav-bottom>
+   <nav-bottom id="footer"></nav-bottom>
    <BackTop></BackTop>
   </div>
 
