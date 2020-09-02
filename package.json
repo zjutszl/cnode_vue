@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
-    "bootstrap-vue": "^2.0.0-rc.2",
+    "bootstrap-vue": "^2.0.0-rc.12",
     "iview": "^2.9.2",
     "moment": "^2.21.0",
     "ramda": "^0.25.0",
